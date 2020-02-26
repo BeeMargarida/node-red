@@ -67,6 +67,8 @@ function deleteAllNodes() {
 function deploy() {
     browser.call(function () {
         return when.promise(function(resolve, reject) {
+            console.log("DEPLOY BUTTON");
+            console.log(resolve);
             events.on("runtime-event", function(event) {
                 if (event.id === 'runtime-deploy') {
                     events.removeListener("runtime-event", arguments.callee);
