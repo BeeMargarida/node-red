@@ -10,6 +10,7 @@
     },
     "private": "true",
     "scripts": {
+        "dev": "nodemon packages/node_modules/node-red/red.js",
         "start": "node packages/node_modules/node-red/red.js",
         "test": "grunt",
         "build": "grunt build",
@@ -57,6 +58,7 @@
         "node-red-node-rbe": "^0.2.6",
         "node-red-node-sentiment": "^0.1.6",
         "node-red-node-tail": "^0.1.0",
+        "nodemon": "^2.0.2",
         "nopt": "4.0.1",
         "oauth2orize": "1.11.0",
         "on-headers": "1.0.2",
