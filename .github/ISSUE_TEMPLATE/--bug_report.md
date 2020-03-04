@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Reproducible software issues in the core of Node-RED
+about: Reproducable software issues in the core of Node-RED
 title: ''
 labels: ''
 assignees: ''
