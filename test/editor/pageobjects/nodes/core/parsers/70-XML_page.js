@@ -14,22 +14,22 @@
  * limitations under the License.
  **/
 
-var util = require("util");
+var util = require('util');
 
-var nodePage = require("../../node_page");
+var nodePage = require('../../node_page');
 
-function jsonNode(id) {
+function xmlNode(id) {
     nodePage.call(this, id);
 }
 
-util.inherits(jsonNode, nodePage);
+util.inherits(xmlNode, nodePage);
 
-jsonNode.prototype.setAction = function (action) {
+xmlNode.prototype.setAction = function (action) {
     browser.setValue('node-input-action', action);
 }
 
-jsonNode.prototype.setProperty = function (property) {
+xmlNode.prototype.setProperty = function (property) {
     browser.setValue('//*[contains(@class, "red-ui-typedInput-container")]/div[1]/input', property);
 }
 
-module.exports = jsonNode;
+module.exports = xmlNode;

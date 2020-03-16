@@ -18,18 +18,14 @@ var util = require("util");
 
 var nodePage = require("../../node_page");
 
-function mqttOutNode(id) {
+function delayNode(id) {
     nodePage.call(this, id);
 }
 
-util.inherits(mqttOutNode, nodePage);
+util.inherits(delayNode, nodePage);
 
-mqttOutNode.prototype.setTopic = function(topic) {
-    browser.setValue('#node-input-topic', topic);
+delayNode.prototype.setTimeout = function (timeout) {
+    browser.setValue('//*[@id="node-input-timeout"]', timeout);
 }
 
-mqttOutNode.prototype.setRetain = function (retain) {
-    browser.selectWithWait('#node-input-retain', retain);
-}
-
-module.exports = mqttOutNode;
+module.exports = delayNode;

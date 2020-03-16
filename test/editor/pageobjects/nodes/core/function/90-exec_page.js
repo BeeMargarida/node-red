@@ -18,18 +18,20 @@ var util = require("util");
 
 var nodePage = require("../../node_page");
 
-function jsonNode(id) {
+function execNode(id) {
     nodePage.call(this, id);
 }
 
-util.inherits(jsonNode, nodePage);
+util.inherits(execNode, nodePage);
 
-jsonNode.prototype.setAction = function (action) {
-    browser.setValue('node-input-action', action);
+execNode.prototype.setCommand = function (command) {
+    browser.setValue('//*[@id="node-input-command"]', command);
 }
 
-jsonNode.prototype.setProperty = function (property) {
-    browser.setValue('//*[contains(@class, "red-ui-typedInput-container")]/div[1]/input', property);
+execNode.prototype.setAppend = function (checkbox) {
+    if (browser.isSelected('#node-input-addpay') !== checkbox) {
+        browser.click('#node-input-addpay');
+    }
 }
 
-module.exports = jsonNode;
+module.exports = execNode;
