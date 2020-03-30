@@ -15,13 +15,14 @@
  **/
 
 var idMap = {
-    // common
+    // input
     "inject": ".red-ui-palette-node[data-palette-type='inject']",
+    "httpIn": ".red-ui-palette-node[data-palette-type='http in']",
+    "mqttIn": ".red-ui-palette-node[data-palette-type='mqtt in']",
+    // output
     "debug": ".red-ui-palette-node[data-palette-type='debug']",
-    "complete": ".red-ui-palette-node[data-palette-type='complete']",
-    "catch": ".red-ui-palette-node[data-palette-type='catch']",
-    "status": ".red-ui-palette-node[data-palette-type='status']",
-    "comment": ".red-ui-palette-node[data-palette-type='comment']",
+    "httpResponse": ".red-ui-palette-node[data-palette-type='http response']",
+    "mqttOut": ".red-ui-palette-node[data-palette-type='mqtt out']",
     // function
     "function": ".red-ui-palette-node[data-palette-type='function']",
     "switch": ".red-ui-palette-node[data-palette-type='switch']",
@@ -47,8 +48,6 @@ var idMap = {
     "csv": ".red-ui-palette-node[data-palette-type='csv']",
     "html": ".red-ui-palette-node[data-palette-type='html']",
     "json": ".red-ui-palette-node[data-palette-type='json']",
-    "xml": ".red-ui-palette-node[data-palette-type='xml']",
-    "yaml": ".red-ui-palette-node[data-palette-type='yaml']",
     // storage
     "fileIn": ".red-ui-palette-node[data-palette-type='file in']",
 };

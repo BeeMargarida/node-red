@@ -14,9 +14,9 @@
  * limitations under the License.
  **/
 
-var util = require('util');
+var util = require("util");
 
-var nodePage = require('../../node_page');
+var nodePage = require("../../node_page");
 
 function jsonNode(id) {
     nodePage.call(this, id);

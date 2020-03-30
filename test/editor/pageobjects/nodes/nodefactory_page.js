@@ -16,10 +16,6 @@
 
 var injectNode = require('./core/common/20-inject_page');
 var debugNode = require('./core/common/21-debug_page');
-var completeNode = require('./core/common/24-complete_page');
-var catchNode = require('./core/common/25-catch_page');
-var statusNode = require('./core/common/25-status_page');
-var commentNode = require('./core/common/90-comment_page');
 var functionNode = require('./core/function/10-function_page');
 var switchNode = require('./core/function/10-switch_page');
 var changeNode = require('./core/function/15-change_page');
@@ -41,18 +37,12 @@ var batchNode = require('./core/sequence/19-batch_page');
 var csvNode = require('./core/parsers/70-CSV_page');
 var htmlNode = require('./core/parsers/70-HTML_page');
 var jsonNode = require('./core/parsers/70-JSON_page');
-var xmlNode = require('./core/parsers/70-XML_page');
-var yamlNode = require('./core/parsers/70-YAML_page');
 var fileInNode = require('./core/storage/10-filein_page');
 
 var nodeCatalog = {
     // common
     "inject": injectNode,
     "debug": debugNode,
-    "complete": completeNode,
-    "catch": catchNode,
-    "status": statusNode,
-    "comment": commentNode,
     // function
     "function": functionNode,
     "switch": switchNode,
@@ -75,11 +65,8 @@ var nodeCatalog = {
     "join": joinNode,
     "batch": batchNode,
     // parser
-    "csv": csvNode,
     "html": htmlNode,
     "json": jsonNode,
-    "xml": xmlNode,
-    "yaml": yamlNode,
     // storage
     "fileIn": fileInNode
 };
