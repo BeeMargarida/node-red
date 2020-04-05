@@ -1,52 +1,65 @@
+import gc
+gc.collect()
 import sys
+gc.collect()
 import ujson
+gc.collect()
 import uasyncio as asyncio
+gc.collect()
 mqtt_client = None
-nodes_id = ["b256e7e71a361"]
-input_topics = ["topic1_node"]
-output_topics = ["topic0_node"]
+nodes_id = ["5c254a58f2cab4","fb0ed2cf7f5388"]
+input_topics = ["topic7_node"]
+output_topics = ["topic3_node"]
 
-input_topics_b256e7e71a361 = ["topic1_node"]
-output_topics_b256e7e71a361 = ["topic0_node"]
-property_b256e7e71a361 = "payload.temperature"
+import dht
+gc.collect()
+import machine
+gc.collect()
+output_topics_5c254a58f2cab4 = ["topic3_node"]
+pin_5c254a58f2cab4 = 14
+interval_5c254a58f2cab4 = 5000
+repeat_5c254a58f2cab4 = True
 
-def if_rule_b256e7e71a361_0(a, b = 40):
-    a = int(a)
-    return a >= b
-def if_function_b256e7e71a361(a):
-    res = if_rule_b256e7e71a361_0(a)
-    return '%s' % res
+reference_timer_workaround = []
 
-def get_property_value_b256e7e71a361(msg):
-    properties = property_b256e7e71a361.split(".")
-    payload = ujson.loads(msg)
-
-    for property in properties:
-        try:
-            if payload[property]:
-                payload = payload[property]
-            else:
-                print("b256e7e71a361: Property not found")
-                break
-        except:
-            print("b256e7e71a361: Msg is not an object")
-            break
-
-    return payload
-
-def on_input_b256e7e71a361(topic, msg, retained):
-    msg = get_property_value_b256e7e71a361(msg)
-    res = if_function_b256e7e71a361(msg)
-
-    # Create task to publish to output topics
+def measure(_):
+    d = dht.DHT22(machine.Pin(pin_5c254a58f2cab4))
+    d.measure()
+    temperature = d.temperature()
+    humidity = d.humidity()
+    results = dict(
+        payload=dict(
+            temperature=temperature,
+            humidity=humidity
+        ) 
+    )
     loop = asyncio.get_event_loop()
-    loop.create_task(on_output(res, output_topics_b256e7e71a361))
+    loop.create_task(on_output(ujson.dumps(results), output_topics_5c254a58f2cab4))
 
+def stop_5c254a58f2cab4():
+    for timer in reference_timer_workaround:
+        timer.deinit()
+
+def exec_5c254a58f2cab4():
+    if repeat_5c254a58f2cab4:
+        timer = machine.Timer(-1)    
+        timer.init(period=interval_5c254a58f2cab4, mode=machine.Timer.PERIODIC, callback=measure)
+        reference_timer_workaround.append(timer)
+    else: 
+        measure(None)
+    return
+
+input_topics_fb0ed2cf7f5388 = ["topic7_node"]
+output_topics_fb0ed2cf7f5388 = ["results"]
+
+def on_input_fb0ed2cf7f5388(topic, msg, retained):
+    loop = asyncio.get_event_loop()
+    loop.create_task(on_output(msg, output_topics_fb0ed2cf7f5388))
 
 def on_input(topic, msg, retained):
     topic = topic.decode()
-    if topic in input_topics_b256e7e71a361:
-        on_input_b256e7e71a361(topic, msg, retained)
+    if topic in input_topics_fb0ed2cf7f5388:
+        on_input_fb0ed2cf7f5388(topic, msg, retained)
 
 
 async def conn_han(client):
