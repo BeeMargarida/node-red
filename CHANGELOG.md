@@ -1,3 +1,113 @@
+#### 1.0.6: Maintenance Release
+
+Runtime
+
+ - Update to JSONata 1.8.3
+ - #2536 Handle clone of null in utils
+
+Editor
+
+ - Prevent button label wrapping in typedInput
+ - Handle error objects when reporting in palette manager
+
+Nodes
+
+ - Inject: Revert to cron 1.7.2
+ - UDP: when reusing input socket honour the broadcast mode.
+
+#### 1.0.5: Maintenance Release
+
+Runtime
+
+ - #2500 Support for context stores using JSONata and evaluateNodeProperty()
+ - Add better handling of host-key-verify error with projects
+ - #2517 Handle false values in $env() properly
+ - #2514 Ensure complete node scope is remapped in subflows
+ - #2513 Flows/subflows must preinitialise their context objects
+ - Clear node.close timeout to avoid unnecessary work on restart
+ - #2532 Set flow.disabled when disabled property is false
+ - #2522 Ensure file context does not write 'undefined' to store
+
+Editor
+
+ - #2489 Fix XPath in UI tests
+ - #2504 Fix paletteCategories order
+ - #2501 Add page objects for UI testing
+ - #2494 Check node props when deciding if pasted node can splice links
+ - #2521 Don't double-sanitize node name in debug sidebar
+ - #2519 German i18n updates
+ - #2523 Update nodeTabMap when replacing unknown nodes
+ - Update TypedInput to use flexbox and remove resizing code
+ - Handle nodes with no wires array
+ - Do not collapse whitespace in Debug string messages
+
+Nodes
+
+ - File: Remove old legacy wording from file node info to stop confusing users.
+ - Join: Ensure join node handles missing buffer joiner when not in string mode
+ - Exec: make exec node logging consistent with itself. (only be verbose when in verbose mode)
+ - Trigger: reset default timeout value when switching away from wait for reset
+ - Join: Fix join to not crash on appending invalid types to buffer.
+ - MQTT out: Add warning if topic contains + or #
+ - #2502 WebSocket i18n update
+ - #2508 Add Japanese translation for join node
+ - TCP out: tidy up select of which rows to display
+
+
+#### 1.0.4: Maintenance Release
+
+Runtime
+
+ - Update all dependencies to latest fix versions
+ - Update JSONata to 1.8.1
+ - #2473 Handle httpAdminRoot missing ending slash with login strategy Fixes
+ - #2470 Update https-proxy-agent
+ - #2461 Allow credentials to be provided as part of /flows api
+ - #2444 Move receive metric position to better reflect async changes Fixes
+ - #2406 Improve file store error when cache disabled and sync api used Closes
+ - #2399 cloneMessage should handle undefined without throwing err Fixes
+ - #2418 Fix the library api routes to prevent too broad matching of regex URLs
+ - #2417 Remove undefined loadFlowLibrary call
+
+Editor
+
+ - #2465 Add better regex highlighting in jsonata edit mode Fixes
+ - Add regex awareness to jsonata formatter
+ - #2472 Avoid adding extra newlines when formating jsonata Fixes
+ - #2475 Add UI test case for error handling
+ - Avoid adding extra divs to edit form to avoid size miscalculation
+ - Upgrade to latest marked and dompurify libs
+ - Ensure catalog load errors are logged to the console
+ - #2460 Track context sidebar element paths to track formatting changes Fixes
+ - Battling Chrome Autocomplete, part 31: Wrap search input with form
+ - #2445 Trick chrome into autofilling dummy username/password inputs Fixes
+ - #2457 Fix garbled characters in library
+ - #2409 Filter palette using raw label not html formatted label Fixes
+ - #2400 Wrap long context values when displaying in sidebar Fixes
+ - Fix duplicating array item in visual json editor
+ - #2338 Modify history sidebar button positioning to handle long labels Fixes
+ - #2438 Add some auto-complete snippets to the nrjavascript mode Close
+ - #2430 Ignore disabled nodes when checking for invalid configs on deploy Closes
+ - #2442 #2458 #2453 Update zh-CN translations
+ - #2235 Add initial zh-TW translation
+ - Re-enable jshint on editor and fixup issues
+ - #2431 Remove unnecessary namespaces for i18n
+ - #2440 Support BrowserStack in UI testing
+ - #2358 Add path property to debug messages Fixes
+ - Fix false change detection when no config node selected
+ - Fix IME bug in text editor
+ - Make node highlighting a bit more obvious for busy flows
+ - #2392 Add icons and support i18n in typedInput of JSON editor
+
+Nodes
+ - #2462 MQTT: Ensure IPv6 broker names are wrapped in brackets Fixes
+ - Join node - check existance before clearing timeout
+ - Trigger: Complete 2nd msg when set to send latest
+ - TCP: clarify text regarding blank parameters.
+ - #2449 HTTP Request: Add HEAD as Method
+ - Make min-height for change, switch, batch and mqtt consistent
+
+
 #### 1.0.3: Maintenance Release
 
 Runtime
