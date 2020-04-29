@@ -7,23 +7,23 @@ gc.collect()
 import uasyncio as asyncio
 gc.collect()
 mqtt_client = None
-nodes_id = ["b256e7e71a361","1d9c9acba02ea5"]
-input_topics = ["topic2_node","topic4_node"]
-output_topics = ["topic0_node","topic1_node","topic5_node","topic6_node"]
+nodes_id = ["292fca1ca69586","3a4475aaf6d8aa"]
+input_topics = ["topic0_node","topic1_node"]
+output_topics = ["topic2_node","topic3_node","topic4_node","topic5_node"]
 
-input_topics_b256e7e71a361 = ["topic2_node"]
-output_topics_b256e7e71a361 = ["topic0_node","topic1_node"]
-property_b256e7e71a361 = "payload.temperature"
+input_topics_292fca1ca69586 = ["topic0_node"]
+output_topics_292fca1ca69586 = ["topic2_node","topic3_node"]
+property_292fca1ca69586 = "payload.temperature"
 
-def if_rule_b256e7e71a361_0(a, b = 15):
+def if_rule_292fca1ca69586_0(a, b = 20):
     a = int(a)
     return a >= b
-def if_function_b256e7e71a361(a):
-    res = if_rule_b256e7e71a361_0(a)
+def if_function_292fca1ca69586(a):
+    res = if_rule_292fca1ca69586_0(a)
     return '%s' % res
 
-def get_property_value_b256e7e71a361(msg):
-    properties = property_b256e7e71a361.split(".")
+def get_property_value_292fca1ca69586(msg):
+    properties = property_292fca1ca69586.split(".")
     payload = ujson.loads(msg)
 
     for property in properties:
@@ -36,29 +36,29 @@ def get_property_value_b256e7e71a361(msg):
             break
     return payload
 
-def on_input_b256e7e71a361(topic, msg, retained):
-    msg = get_property_value_b256e7e71a361(msg)
-    res = if_function_b256e7e71a361(msg)
+def on_input_292fca1ca69586(topic, msg, retained):
+    msg = get_property_value_292fca1ca69586(msg)
+    res = if_function_292fca1ca69586(msg)
     res = dict(
         payload=res
     )
     loop = asyncio.get_event_loop()
-    loop.create_task(on_output(ujson.dumps(res), output_topics_b256e7e71a361))
+    loop.create_task(on_output(ujson.dumps(res), output_topics_292fca1ca69586))
     return
 
-input_topics_1d9c9acba02ea5 = ["topic4_node"]
-output_topics_1d9c9acba02ea5 = ["topic5_node","topic6_node"]
-property_1d9c9acba02ea5 = "payload.humidity"
+input_topics_3a4475aaf6d8aa = ["topic1_node"]
+output_topics_3a4475aaf6d8aa = ["topic4_node","topic5_node"]
+property_3a4475aaf6d8aa = "payload.humidity"
 
-def if_rule_1d9c9acba02ea5_0(a, b = 20):
+def if_rule_3a4475aaf6d8aa_0(a, b = 20):
     a = int(a)
     return a >= b
-def if_function_1d9c9acba02ea5(a):
-    res = if_rule_1d9c9acba02ea5_0(a)
+def if_function_3a4475aaf6d8aa(a):
+    res = if_rule_3a4475aaf6d8aa_0(a)
     return '%s' % res
 
-def get_property_value_1d9c9acba02ea5(msg):
-    properties = property_1d9c9acba02ea5.split(".")
+def get_property_value_3a4475aaf6d8aa(msg):
+    properties = property_3a4475aaf6d8aa.split(".")
     payload = ujson.loads(msg)
 
     for property in properties:
@@ -71,22 +71,22 @@ def get_property_value_1d9c9acba02ea5(msg):
             break
     return payload
 
-def on_input_1d9c9acba02ea5(topic, msg, retained):
-    msg = get_property_value_1d9c9acba02ea5(msg)
-    res = if_function_1d9c9acba02ea5(msg)
+def on_input_3a4475aaf6d8aa(topic, msg, retained):
+    msg = get_property_value_3a4475aaf6d8aa(msg)
+    res = if_function_3a4475aaf6d8aa(msg)
     res = dict(
         payload=res
     )
     loop = asyncio.get_event_loop()
-    loop.create_task(on_output(ujson.dumps(res), output_topics_1d9c9acba02ea5))
+    loop.create_task(on_output(ujson.dumps(res), output_topics_3a4475aaf6d8aa))
     return
 
 def on_input(topic, msg, retained):
     topic = topic.decode()
-    if topic in input_topics_b256e7e71a361:
-        on_input_b256e7e71a361(topic, msg, retained)
-    elif topic in input_topics_1d9c9acba02ea5:
-        on_input_1d9c9acba02ea5(topic, msg, retained)
+    if topic in input_topics_292fca1ca69586:
+        on_input_292fca1ca69586(topic, msg, retained)
+    elif topic in input_topics_3a4475aaf6d8aa:
+        on_input_3a4475aaf6d8aa(topic, msg, retained)
 
 
 async def conn_han(client):
