@@ -1,1 +1,85 @@
-[object Object]
+{
+    "192.168.1.200": {
+        "status": 1,
+        "nodes": [
+            {
+                "id": "ee3852f2.49b1a",
+                "textId": "ee3852f249b1a",
+                "type": "temperature-humidity",
+                "z": "474e58bf.adc67",
+                "predicates": [
+                    "temperature",
+                    "humidity",
+                    "micropython"
+                ],
+                "priorities": [],
+                "brokerUrl": null,
+                "inputTopics": [],
+                "outputTopics": [
+                    "topic0_node"
+                ],
+                "subscriptionsMQTT": {},
+                "micropythonCode": "\nimport dht\ngc.collect()\nimport machine\ngc.collect()\noutput_topics_ee3852f249b1a = [\"topic0_node\"]\npin_ee3852f249b1a = 32\ninterval_ee3852f249b1a = 5000\nrepeat_ee3852f249b1a = True\n\nreference_timer_workaround = []\n\ndef measure_ee3852f249b1a(_):\n    d = dht.DHT22(machine.Pin(pin_ee3852f249b1a))\n    d.measure()\n    temperature = d.temperature()\n    humidity = d.humidity()\n    results = dict(\n        payload=dict(\n            temperature=temperature,\n            humidity=humidity\n        ) \n    )\n    loop = asyncio.get_event_loop()\n    loop.create_task(on_output(ujson.dumps(results), output_topics_ee3852f249b1a))\n\ndef stop_ee3852f249b1a():\n    for timer in reference_timer_workaround:\n        timer.deinit()\n\ndef exec_ee3852f249b1a():\n    if repeat_ee3852f249b1a:\n        timer = machine.Timer(-1)    \n        timer.init(period=interval_ee3852f249b1a, mode=machine.Timer.PERIODIC, callback=measure_ee3852f249b1a)\n        reference_timer_workaround.append(timer)\n    else: \n        measure_ee3852f249b1a(None)\n    return\n",
+                "hasInput": false,
+                "local": false
+            }
+        ]
+    },
+    "node-red": {
+        "status": 1,
+        "nodes": [
+            {
+                "id": "737d99f6.38d818",
+                "textId": "737d99f638d818",
+                "type": "if",
+                "z": "474e58bf.adc67",
+                "predicates": [],
+                "priorities": [
+                    "micropython"
+                ],
+                "brokerUrl": null,
+                "inputTopics": [
+                    "topic0_node"
+                ],
+                "outputTopics": [
+                    "topic1_node"
+                ],
+                "subscriptionsMQTT": {
+                    "topic0_node": {
+                        "topic": "topic0_node",
+                        "qos": {
+                            "qos": 2
+                        }
+                    }
+                },
+                "micropythonCode": "\ninput_topics_737d99f638d818 = [\"topic0_node\"]\noutput_topics_737d99f638d818 = [\"topic1_node\"]\nproperty_737d99f638d818 = \"payload.temperature\"\n\ndef if_rule_737d99f638d818_0(a, b = 20):\n    a = int(a)\n    return a >= b\ndef if_function_737d99f638d818(a):\n    res = if_rule_737d99f638d818_0(a)\n    return '%s' % res\n\ndef get_property_value_737d99f638d818(msg):\n    properties = property_737d99f638d818.split(\".\")\n    payload = ujson.loads(msg)\n\n    for property in properties:\n        try:\n            if payload[property]:\n                payload = payload[property]\n            else:\n                break\n        except:\n            break\n    return payload\n\ndef on_input_737d99f638d818(topic, msg, retained):\n    msg = get_property_value_737d99f638d818(msg)\n    res = if_function_737d99f638d818(msg)\n    res = dict(\n        payload=res\n    )\n    loop = asyncio.get_event_loop()\n    loop.create_task(on_output(ujson.dumps(res), output_topics_737d99f638d818))\n    return\n",
+                "hasInput": true,
+                "local": true
+            },
+            {
+                "id": "6e1168a8.2efb68",
+                "textId": "6e1168a82efb68",
+                "type": "debug",
+                "z": "474e58bf.adc67",
+                "predicates": [],
+                "priorities": [],
+                "brokerUrl": null,
+                "inputTopics": [
+                    "topic1_node"
+                ],
+                "outputTopics": [],
+                "subscriptionsMQTT": {
+                    "topic1_node": {
+                        "topic": "topic1_node",
+                        "qos": {
+                            "qos": 2
+                        }
+                    }
+                },
+                "micropythonCode": "",
+                "hasInput": true,
+                "local": true
+            }
+        ]
+    }
+}
