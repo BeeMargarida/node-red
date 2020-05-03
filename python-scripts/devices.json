@@ -1,0 +1,34 @@
+{
+    "192.168.1.200": {
+        "status": 1,
+        "state": {},
+        "memoryErrorNodes": null,
+        "capabilities": [
+            "temperature",
+            "humidity",
+            "micropython"
+        ],
+        "nodes": []
+    },
+    "192.168.1.207": {
+        "status": 1,
+        "state": {},
+        "memoryErrorNodes": null,
+        "capabilities": [
+            "micropython"
+        ],
+        "nodes": []
+    },
+    "192.168.1.206": {
+        "status": 1,
+        "state": {},
+        "memoryErrorNodes": null,
+        "capabilities": [
+            "temperature",
+            "humidity",
+            "micropython",
+            "first-floor"
+        ],
+        "nodes": []
+    }
+}
