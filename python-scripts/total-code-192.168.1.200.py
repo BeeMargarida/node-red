@@ -7,31 +7,23 @@ gc.collect()
 import uasyncio as asyncio
 gc.collect()
 mqtt_client = None
-nodes_id = ["89e731aa94d7d","811d44e1d60768"]
-input_topics = ["topic0_node"]
-output_topics = ["topic233cfe16d92bc2_node_sub"]
-
-input_topics_89e731aa94d7d = ["topic0_node"]
-output_topics_89e731aa94d7d = ["results"]
-
-def on_input_89e731aa94d7d(topic, msg, retained):
-    print(msg)            
-    loop = asyncio.get_event_loop()
-    loop.create_task(on_output(msg, output_topics_89e731aa94d7d))
+nodes_id = ["a58d53e42067c"]
+input_topics = []
+output_topics = ["topic0_node"]
 
 import dht
 gc.collect()
 import machine
 gc.collect()
-output_topics_811d44e1d60768 = ["topic233cfe16d92bc2_node_sub"]
-pin_811d44e1d60768 = 32
-interval_811d44e1d60768 = 5000
-repeat_811d44e1d60768 = True
+output_topics_a58d53e42067c = ["topic0_node"]
+pin_a58d53e42067c = 32
+interval_a58d53e42067c = 5000
+repeat_a58d53e42067c = True
 
 reference_timer_workaround = []
 
-def measure_811d44e1d60768(_):
-    d = dht.DHT22(machine.Pin(pin_811d44e1d60768))
+def measure_a58d53e42067c(_):
+    d = dht.DHT22(machine.Pin(pin_a58d53e42067c))
     d.measure()
     temperature = d.temperature()
     humidity = d.humidity()
@@ -42,25 +34,23 @@ def measure_811d44e1d60768(_):
         ) 
     )
     loop = asyncio.get_event_loop()
-    loop.create_task(on_output(ujson.dumps(results), output_topics_811d44e1d60768))
+    loop.create_task(on_output(ujson.dumps(results), output_topics_a58d53e42067c))
 
-def stop_811d44e1d60768():
+def stop_a58d53e42067c():
     for timer in reference_timer_workaround:
         timer.deinit()
 
-def exec_811d44e1d60768():
-    if repeat_811d44e1d60768:
+def exec_a58d53e42067c():
+    if repeat_a58d53e42067c:
         timer = machine.Timer(-1)    
-        timer.init(period=interval_811d44e1d60768, mode=machine.Timer.PERIODIC, callback=measure_811d44e1d60768)
+        timer.init(period=interval_a58d53e42067c, mode=machine.Timer.PERIODIC, callback=measure_a58d53e42067c)
         reference_timer_workaround.append(timer)
     else: 
-        measure_811d44e1d60768(None)
+        measure_a58d53e42067c(None)
     return
 
 def on_input(topic, msg, retained):
     topic = topic.decode()
-    if topic in input_topics_89e731aa94d7d:
-        on_input_89e731aa94d7d(topic, msg, retained)
 
 async def conn_han(client):
     for input_topic in input_topics:
