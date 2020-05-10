@@ -1,29 +1,25 @@
 import gc
-gc.collect()
 import sys
-gc.collect()
 import ujson
-gc.collect()
 import uasyncio as asyncio
-gc.collect()
 mqtt_client = None
-nodes_id = ["7156e3bb656294"]
-input_topics = ["topic0_node"]
-output_topics = ["topic1_node"]
+nodes_id = ["a4327ad5b4ba8"]
+input_topics = ["topic1_node"]
+output_topics = ["topic4_node","topic5_node"]
 
-input_topics_7156e3bb656294 = ["topic0_node"]
-output_topics_7156e3bb656294 = ["topic1_node"]
-property_7156e3bb656294 = "payload.temperature"
+input_topics_a4327ad5b4ba8 = ["topic1_node"]
+output_topics_a4327ad5b4ba8 = ["topic4_node","topic5_node"]
+property_a4327ad5b4ba8 = "payload.temperature"
 
-def if_rule_7156e3bb656294_0(a, b = 20):
+def if_rule_a4327ad5b4ba8_0(a, b = 15):
     a = int(a)
     return a >= b
-def if_function_7156e3bb656294(a):
-    res = if_rule_7156e3bb656294_0(a)
+def if_function_a4327ad5b4ba8(a):
+    res = if_rule_a4327ad5b4ba8_0(a)
     return '%s' % res
 
-def get_property_value_7156e3bb656294(msg):
-    properties = property_7156e3bb656294.split(".")
+def get_property_value_a4327ad5b4ba8(msg):
+    properties = property_a4327ad5b4ba8.split(".")
     payload = ujson.loads(msg)
 
     for property in properties:
@@ -36,20 +32,22 @@ def get_property_value_7156e3bb656294(msg):
             break
     return payload
 
-def on_input_7156e3bb656294(topic, msg, retained):
-    msg = get_property_value_7156e3bb656294(msg)
-    res = if_function_7156e3bb656294(msg)
+def on_input_a4327ad5b4ba8(topic, msg, retained):
+    print(topic)
+    print(msg)
+    msg = get_property_value_a4327ad5b4ba8(msg)
+    res = if_function_a4327ad5b4ba8(msg)
     res = dict(
         payload=res
     )
     loop = asyncio.get_event_loop()
-    loop.create_task(on_output(ujson.dumps(res), output_topics_7156e3bb656294))
+    loop.create_task(on_output(ujson.dumps(res), output_topics_a4327ad5b4ba8))
     return
 
 def on_input(topic, msg, retained):
     topic = topic.decode()
-    if topic in input_topics_7156e3bb656294:
-        on_input_7156e3bb656294(topic, msg, retained)
+    if topic in input_topics_a4327ad5b4ba8:
+        on_input_a4327ad5b4ba8(topic, msg, retained)
 
 async def conn_han(client):
     for input_topic in input_topics:
