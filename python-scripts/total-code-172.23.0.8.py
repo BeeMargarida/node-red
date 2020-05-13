@@ -61,6 +61,7 @@ def exec_973613f1ffaa():
             reference_timer_workaround.append(timer)
         else:
             loop = asyncio.get_event_loop()
+            print("starting")
             loop.create_task(timer_exec_973613f1ffaa(measure_973613f1ffaa, interval_973613f1ffaa))
     else: 
         measure_973613f1ffaa(None)
