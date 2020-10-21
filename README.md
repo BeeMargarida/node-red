@@ -1,6 +1,6 @@
 # Decentralized Node-RED
 
-A modified Node-RED that takes advantage of the capabilities of the devices in the network.
+A modified Node-RED that takes advantage of the capabilities of the devices in the network. Related to my [dissertation](https://repositorio-aberto.up.pt/handle/10216/128520).
 
 # Overview
 
